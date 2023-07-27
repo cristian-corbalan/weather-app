@@ -1,29 +1,51 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather searcher</title>
 
-  <title>Weather finder</title>
+    <!-- Icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-  <link rel="stylesheet" href="stylesheets/main.css">
+    <!--Tailwind-->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Main script -->
+    <script src="scripts/main.js"></script>
 </head>
 <body>
-<header>
-  <h1>Weather finder</h1>
-</header>
-<main>
+<div class="container m-auto">
+    <header class="p-6">
+        <h1 class="text-center text-lg">Weather searcher</h1>
+    </header>
+    <main>
+        <header>
+            <form class="flex items-end" action="#">
+                <!-- Input -->
+                <div class="w-5/6">
+                    <label class="block mb-4 text-md font-medium leading-6 text-gray-900"
+                           for="searchInput">Set location</label>
+                    <input id="searchInput"
+                           class="block w-full rounded-md border-2 border-solid border-gray-300 p-2 text-gray-900"
+                           type="search"
+                           name="searchInput">
+                </div>
+                <!-- Button -->
+                <div class="w-1/6 pl-4 pb-0.5">
+                    <button class="bg-stone-500 font-bold text-md text-white py-2 px-4 rounded-md"
+                            type="submit">Search
+                    </button>
+                </div>
+            </form>
+        </header>
 
-</main>
-<footer>
+        <article id="content">
 
-</footer>
-
-<script src="scripts/main.js"></script>
+        </article>
+    </main>
+</div>
 </body>
 </html>

@@ -37,6 +37,11 @@ form.addEventListener('submit', async (e) => {
     } else {
         // console.info("The location is :", locations[0])
         let location = locations[0];
+
+        console.info(location);
+
+        let url = getWeatherURL(location);
+
     }
 })
 
@@ -48,6 +53,23 @@ form.addEventListener('submit', async (e) => {
 const getLatAndLon = function (location) {
     return fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${API_KEY}`)
         .then(res => res.json());
+}
+
+/**
+ * Use the location's latitude and longitude to complete the API_URL.
+ *
+ * @param {Object} location
+ * @return {string} Weather API URL.
+ */
+const getWeatherURL = function (location) {
+    let lat = location.lat;
+    let lon = location.lon;
+    // console.log(lat, lon);
+
+    let url = API_URL.replace('{lat}', lat);
+    url = url.replace('{lon}', lon);
+
+    return url;
 }
 
 /**

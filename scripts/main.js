@@ -16,17 +16,17 @@ form.addEventListener('submit', async (e) => {
      */
     let locations = await getLatAndLon(value);
 
-    if(locations.cod === "400"){
+    if (locations.cod === "400") {
         // console.info("Write a location in the input");
         let p = document.createElement('p');
         p.innerText = 'Write a location in the input';
         content.appendChild(p);
-    }else if(!locations.length){
+    } else if (!locations.length) {
         // console.info("Location not found");
         let p = document.createElement('p');
         p.innerText = 'Location not found';
         content.appendChild(p);
-    }else {
+    } else {
         // console.info("The location is :", locations[0])
         let location = locations[0];
     }
@@ -37,7 +37,34 @@ form.addEventListener('submit', async (e) => {
  * @param {string} location
  * @return {Promise}
  */
-const getLatAndLon = function (location){
+const getLatAndLon = function (location) {
     return fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=5&appid=${API_KEY}`)
         .then(res => res.json());
+}
+
+/**
+ * Create a HTMLElement
+ *
+ * @param {string} name Tag's name.
+ * @param {object | null} attributes The object's properties are the attribute name.
+ * @param {string | null} content Tag's innerText.
+ */
+const createTag = function (name = '', attributes = null, content = null) {
+    if (!name) {
+        console.error("The name is obligatory");
+    }
+
+    let tag = document.createElement(name);
+
+    if (attributes) {
+        for (const i in attributes) {
+            tag.setAttribute(i, attributes[i]);
+        }
+    }
+
+    if (content) {
+        tag.innerText = content;
+    }
+
+    return tag;
 }

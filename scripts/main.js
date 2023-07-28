@@ -38,10 +38,11 @@ form.addEventListener('submit', async (e) => {
         // console.info("The location is :", locations[0])
         let location = locations[0];
 
-        console.info(location);
-
         let url = getWeatherURL(location);
 
+        let info = await getWeatherInfo(url);
+
+        // console.info('Weather info:', info);
     }
 })
 
@@ -70,6 +71,17 @@ const getWeatherURL = function (location) {
     url = url.replace('{lon}', lon);
 
     return url;
+}
+
+/**
+ * Get the weather information of a location.
+ *
+ * @param {string} url API_URL with the latitude and longitude.
+ * @return {Promise<any>}
+ */
+const getWeatherInfo = function (url) {
+    return fetch(url)
+        .then(response => response.json());
 }
 
 /**

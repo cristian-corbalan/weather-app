@@ -1,0 +1,21 @@
+  html,
+  body{
+    height: 100%;
+  }
+
+  .weather-icon{
+    font-size: 160px;
+  }
+
+  .sr-only{
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+  }
+
+  .real-feel{
+    margin-left: 176px;
+  }

@@ -9,6 +9,8 @@ const content = document.getElementById('content');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
+    content.innerHTML = ''
+
     let value = document.querySelector('#searchInput').value;
 
     /**
@@ -18,13 +20,19 @@ form.addEventListener('submit', async (e) => {
 
     if (locations.cod === "400") {
         // console.info("Write a location in the input");
-        let p = document.createElement('p');
-        p.innerText = 'Write a location in the input';
+        let p = createTag(
+            'p',
+            {class: 'p-6 text-center text-lg font-bold text-red-500'},
+            'Write a location in the input'
+        )
         content.appendChild(p);
     } else if (!locations.length) {
         // console.info("Location not found");
-        let p = document.createElement('p');
-        p.innerText = 'Location not found';
+        let p = createTag(
+            'p',
+            {class: 'p-6 text-center text-lg font-bold'},
+            'Location not found'
+        )
         content.appendChild(p);
     } else {
         // console.info("The location is :", locations[0])

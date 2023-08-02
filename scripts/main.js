@@ -43,6 +43,7 @@ form.addEventListener('submit', async (e) => {
         let info = await getWeatherInfo(url);
 
         // console.info('Weather info:', info);
+        makeWeatherHtml(location, info);
     }
 })
 
@@ -82,6 +83,122 @@ const getWeatherURL = function (location) {
 const getWeatherInfo = function (url) {
     return fetch(url)
         .then(response => response.json());
+}
+
+const makeWeatherHtml = function (location, info) {
+    console.info(info);
+    console.info(location);
+
+    content.innerHTML = '';
+
+    let h1 = createTag(
+        'h1',
+        {class: 'font-bold text-xl mb-8'},
+        `Weather in ${location.name}`
+    );
+    content.appendChild(h1);
+
+    let divContainer = createTag(
+        'div',
+        {class: 'bg-teal-200 p-8 flex flex-wrap'}
+    );
+    content.appendChild(divContainer);
+
+    let p = createTag(
+        'p',
+        {class: 'text-xl font-medium w-full mb-6'},
+        `${info.weather[0].description}`
+    );
+    divContainer.appendChild(p);
+
+    p = createTag(
+        'p',
+        {class: 'w-1/2'}
+    );
+    divContainer.appendChild(p);
+
+    let img = createTag(
+        'img',
+        {
+            class: 'inline-block',
+            src: `https://openweathermap.org/img/wn/${info.weather[0].icon}@2x.png`,
+            alt: `info.weather[0].description`
+        }
+    )
+    p.appendChild(img);
+
+    /*let iconTag = createTag(
+        'i',
+        {class: 'bx bx-cloud weather-icon align-middle'}
+    )
+    p.appendChild(iconTag);*/
+
+    let span = createTag(
+        'span',
+        {class: 'text-7xl align-middle pl-4'},
+        `${Math.round(info.main.temp)}º`
+    )
+    p.appendChild(span);
+
+    let spanSr = createTag(
+        'span',
+        {class: 'sr-only'},
+        'Current temperature '
+    )
+    p.prepend(spanSr);
+
+    span = createTag(
+        'span',
+        {class: 'block text-xl real-feel'},
+        `Real feel ${Math.round(info.main.feels_like)}º`
+    )
+    p.appendChild(span);
+
+    let ul = createTag(
+        'ul',
+        {class: 'w-1/2'}
+    );
+    divContainer.appendChild(ul);
+
+    let li = createTag(
+        'li',
+        {class: 'flex p-3 border-b-2 border-gray-400'}
+    );
+    ul.appendChild(li);
+
+    span = createTag(
+        'span',
+        {class: 'w-2/3'},
+        'Humidity '
+    );
+    li.appendChild(span);
+
+    span = createTag(
+        'span',
+        {class: 'font-bold'},
+        `${info.main.humidity} %`
+    );
+    li.appendChild(span);
+
+    li = createTag(
+        'li',
+        {class: 'flex p-3 border-b-2 border-gray-400'}
+    );
+    ul.appendChild(li);
+
+    span = createTag(
+        'span',
+        {class: 'w-2/3'},
+        'Wind speed'
+    );
+    li.appendChild(span);
+
+    span = createTag(
+        'span',
+        {class: 'font-bold'},
+        `${info.wind.speed} m/sec`
+    );
+    li.appendChild(span);
 }
 
 /**
